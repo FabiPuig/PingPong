@@ -56,16 +56,17 @@
             this.lvJugador = new System.Windows.Forms.ListView();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.tbNombreJ = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btAdd = new System.Windows.Forms.Button();
-            this.btMod = new System.Windows.Forms.Button();
-            this.btDel = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btImg = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.tbNombreJ = new System.Windows.Forms.TextBox();
+            this.btAdd = new System.Windows.Forms.Button();
+            this.btMod = new System.Windows.Forms.Button();
+            this.btDel = new System.Windows.Forms.Button();
+            this.btOk = new System.Windows.Forms.Button();
+            this.btCancel = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -92,10 +93,9 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -409,7 +409,11 @@
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.flowLayoutPanel2);
+            this.splitContainer4.Panel2.Controls.Add(this.btCancel);
+            this.splitContainer4.Panel2.Controls.Add(this.btOk);
+            this.splitContainer4.Panel2.Controls.Add(this.btAdd);
+            this.splitContainer4.Panel2.Controls.Add(this.btMod);
+            this.splitContainer4.Panel2.Controls.Add(this.btDel);
             this.splitContainer4.Size = new System.Drawing.Size(531, 329);
             this.splitContainer4.SplitterDistance = 281;
             this.splitContainer4.TabIndex = 0;
@@ -431,6 +435,42 @@
             this.splitContainer5.Size = new System.Drawing.Size(531, 281);
             this.splitContainer5.SplitterDistance = 217;
             this.splitContainer5.TabIndex = 0;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.btImg, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.44395F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.55605F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(531, 217);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // btImg
+            // 
+            this.btImg.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btImg.Enabled = false;
+            this.btImg.Location = new System.Drawing.Point(3, 192);
+            this.btImg.Name = "btImg";
+            this.btImg.Size = new System.Drawing.Size(259, 22);
+            this.btImg.TabIndex = 0;
+            this.btImg.Text = "AGREGAR/CAMBIAR IMAGEN";
+            this.btImg.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(259, 183);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // tableLayoutPanel3
             // 
@@ -462,84 +502,60 @@
             // tbNombreJ
             // 
             this.tbNombreJ.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbNombreJ.Enabled = false;
             this.tbNombreJ.Location = new System.Drawing.Point(3, 23);
             this.tbNombreJ.Name = "tbNombreJ";
             this.tbNombreJ.Size = new System.Drawing.Size(525, 20);
             this.tbNombreJ.TabIndex = 1;
             // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.btAdd);
-            this.flowLayoutPanel2.Controls.Add(this.btMod);
-            this.flowLayoutPanel2.Controls.Add(this.btDel);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(531, 44);
-            this.flowLayoutPanel2.TabIndex = 0;
-            // 
             // btAdd
             // 
-            this.btAdd.Location = new System.Drawing.Point(438, 3);
+            this.btAdd.Location = new System.Drawing.Point(436, 5);
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(90, 36);
-            this.btAdd.TabIndex = 0;
+            this.btAdd.TabIndex = 3;
             this.btAdd.Text = "NUEVO";
             this.btAdd.UseVisualStyleBackColor = true;
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
             // 
             // btMod
             // 
-            this.btMod.Location = new System.Drawing.Point(342, 3);
+            this.btMod.Location = new System.Drawing.Point(340, 5);
             this.btMod.Name = "btMod";
             this.btMod.Size = new System.Drawing.Size(90, 36);
-            this.btMod.TabIndex = 1;
+            this.btMod.TabIndex = 4;
             this.btMod.Text = "MODIFICAR";
             this.btMod.UseVisualStyleBackColor = true;
             // 
             // btDel
             // 
-            this.btDel.Location = new System.Drawing.Point(246, 3);
+            this.btDel.Location = new System.Drawing.Point(244, 5);
             this.btDel.Name = "btDel";
             this.btDel.Size = new System.Drawing.Size(90, 36);
-            this.btDel.TabIndex = 2;
+            this.btDel.TabIndex = 5;
             this.btDel.Text = "ELIMINAR";
             this.btDel.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel4
+            // btOk
             // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.btImg, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.44395F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.55605F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(531, 217);
-            this.tableLayoutPanel4.TabIndex = 0;
+            this.btOk.Enabled = false;
+            this.btOk.Location = new System.Drawing.Point(3, 5);
+            this.btOk.Name = "btOk";
+            this.btOk.Size = new System.Drawing.Size(65, 34);
+            this.btOk.TabIndex = 6;
+            this.btOk.Text = "Aceptar";
+            this.btOk.UseVisualStyleBackColor = true;
             // 
-            // btImg
+            // btCancel
             // 
-            this.btImg.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btImg.Location = new System.Drawing.Point(3, 192);
-            this.btImg.Name = "btImg";
-            this.btImg.Size = new System.Drawing.Size(259, 22);
-            this.btImg.TabIndex = 0;
-            this.btImg.Text = "AGREGAR/CAMBIAR IMAGEN";
-            this.btImg.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(259, 183);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.btCancel.Enabled = false;
+            this.btCancel.Location = new System.Drawing.Point(74, 5);
+            this.btCancel.Name = "btCancel";
+            this.btCancel.Size = new System.Drawing.Size(65, 34);
+            this.btCancel.TabIndex = 7;
+            this.btCancel.Text = "Cancelar";
+            this.btCancel.UseVisualStyleBackColor = true;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 
             // Form1
             // 
@@ -576,11 +592,10 @@
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -618,13 +633,14 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.TextBox tbNombreJ;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Button btAdd;
-        private System.Windows.Forms.Button btMod;
-        private System.Windows.Forms.Button btDel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Button btImg;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btCancel;
+        private System.Windows.Forms.Button btOk;
+        private System.Windows.Forms.Button btAdd;
+        private System.Windows.Forms.Button btMod;
+        private System.Windows.Forms.Button btDel;
     }
 }
 
