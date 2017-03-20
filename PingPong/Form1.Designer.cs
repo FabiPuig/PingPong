@@ -62,11 +62,12 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.tbNombreJ = new System.Windows.Forms.TextBox();
+            this.btCancel = new System.Windows.Forms.Button();
+            this.btOk = new System.Windows.Forms.Button();
             this.btAdd = new System.Windows.Forms.Button();
             this.btMod = new System.Windows.Forms.Button();
             this.btDel = new System.Windows.Forms.Button();
-            this.btOk = new System.Windows.Forms.Button();
-            this.btCancel = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -462,6 +463,7 @@
             this.btImg.TabIndex = 0;
             this.btImg.Text = "AGREGAR/CAMBIAR IMAGEN";
             this.btImg.UseVisualStyleBackColor = true;
+            this.btImg.Click += new System.EventHandler(this.btImg_Click);
             // 
             // pictureBox1
             // 
@@ -508,6 +510,28 @@
             this.tbNombreJ.Size = new System.Drawing.Size(525, 20);
             this.tbNombreJ.TabIndex = 1;
             // 
+            // btCancel
+            // 
+            this.btCancel.Enabled = false;
+            this.btCancel.Location = new System.Drawing.Point(74, 5);
+            this.btCancel.Name = "btCancel";
+            this.btCancel.Size = new System.Drawing.Size(65, 34);
+            this.btCancel.TabIndex = 7;
+            this.btCancel.Text = "Cancelar";
+            this.btCancel.UseVisualStyleBackColor = true;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
+            // 
+            // btOk
+            // 
+            this.btOk.Enabled = false;
+            this.btOk.Location = new System.Drawing.Point(3, 5);
+            this.btOk.Name = "btOk";
+            this.btOk.Size = new System.Drawing.Size(65, 34);
+            this.btOk.TabIndex = 6;
+            this.btOk.Text = "Aceptar";
+            this.btOk.UseVisualStyleBackColor = true;
+            this.btOk.Click += new System.EventHandler(this.btOk_Click);
+            // 
             // btAdd
             // 
             this.btAdd.Location = new System.Drawing.Point(436, 5);
@@ -536,26 +560,12 @@
             this.btDel.Text = "ELIMINAR";
             this.btDel.UseVisualStyleBackColor = true;
             // 
-            // btOk
+            // openFileDialog1
             // 
-            this.btOk.Enabled = false;
-            this.btOk.Location = new System.Drawing.Point(3, 5);
-            this.btOk.Name = "btOk";
-            this.btOk.Size = new System.Drawing.Size(65, 34);
-            this.btOk.TabIndex = 6;
-            this.btOk.Text = "Aceptar";
-            this.btOk.UseVisualStyleBackColor = true;
-            // 
-            // btCancel
-            // 
-            this.btCancel.Enabled = false;
-            this.btCancel.Location = new System.Drawing.Point(74, 5);
-            this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(65, 34);
-            this.btCancel.TabIndex = 7;
-            this.btCancel.Text = "Cancelar";
-            this.btCancel.UseVisualStyleBackColor = true;
-            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" +
+    "s (*.*)|*.*";
+            this.openFileDialog1.Title = "Selecciona una imagen";
             // 
             // Form1
             // 
@@ -641,6 +651,7 @@
         private System.Windows.Forms.Button btAdd;
         private System.Windows.Forms.Button btMod;
         private System.Windows.Forms.Button btDel;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

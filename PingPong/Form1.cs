@@ -13,6 +13,8 @@ namespace PingPong
     public partial class Form1 : Form
     {
         private bool addPlayer = false;
+        private String imgUrl;
+        private Jugador jugador;
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +29,49 @@ namespace PingPong
             addPlayer = true;
 
         }
+
+        private void btCancel_Click(object sender, EventArgs e)
+        {
+            disableOkCancel();
+            enableBtJugador();
+            btImg.Enabled = false;
+            tbNombreJ.Enabled = false;
+            addPlayer = false;
+        }
+
+        private void btImg_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                imgUrl = openFileDialog1.FileName;
+                pictureBox1.Load(openFileDialog1.FileName);
+            }
+        }
+
+        private void btOk_Click(object sender, EventArgs e)
+        {
+            if (addPlayer)
+            {
+                if (string.IsNullOrEmpty(tbNombreJ.Text))
+                {
+                    MessageBox.Show("Debes introducir un nombre");
+                }
+                else if (string.IsNullOrEmpty(imgUrl))
+                {
+                    MessageBox.Show("Debes introducir una imagen");
+                }
+                else
+                {
+                    jugador = new Jugador(tbNombreJ.Text, imgUrl);
+                    MessageBox.Show(jugador.Nombre + " - " + jugador.Image);
+                    addPlayer = false;
+                    disableOkCancel();
+                    enableBtJugador();
+                    btImg.Enabled = false;
+                }
+            }
+        }
+
         private void enableOkCancel()
         {
             btOk.Enabled = true;
@@ -38,14 +83,6 @@ namespace PingPong
             btCancel.Enabled = false;
         }
 
-        private void btCancel_Click(object sender, EventArgs e)
-        {
-            disableOkCancel();
-            enableBtJugador();
-            btImg.Enabled = false;
-            tbNombreJ.Enabled = false;
-            addPlayer = false;
-        }
         private void disableBtJugador()
         {
             btDel.Enabled = false;
@@ -58,5 +95,6 @@ namespace PingPong
             btMod.Enabled = true;
             btAdd.Enabled = true;
         }
+
     }
 }
