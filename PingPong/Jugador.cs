@@ -16,5 +16,10 @@ namespace PingPong
             Nombre = nombre;
             Image = image;
         }
+
+        public override string ToString()
+        {
+            return Nombre + " - " + Id;
+        }
     }
 }

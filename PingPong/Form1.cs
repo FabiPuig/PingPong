@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Firebase.Database;
+
 
 namespace PingPong
 {
@@ -24,8 +26,6 @@ namespace PingPong
         {
             enableOkCancel();
             disableBtJugador();
-            btImg.Enabled = true;
-            tbNombreJ.Enabled = true;
             addPlayer = true;
 
         }
@@ -34,8 +34,6 @@ namespace PingPong
         {
             disableOkCancel();
             enableBtJugador();
-            btImg.Enabled = false;
-            tbNombreJ.Enabled = false;
             addPlayer = false;
         }
 
@@ -63,11 +61,11 @@ namespace PingPong
                 else
                 {
                     jugador = new Jugador(tbNombreJ.Text, imgUrl);
-                    MessageBox.Show(jugador.Nombre + " - " + jugador.Image);
+                    setJugadorFB();
+                    MessageBox.Show("Jugador guardado correctamente");
                     addPlayer = false;
                     disableOkCancel();
                     enableBtJugador();
-                    btImg.Enabled = false;
                 }
             }
         }
@@ -76,11 +74,15 @@ namespace PingPong
         {
             btOk.Enabled = true;
             btCancel.Enabled = true;
+            tbNombreJ.Enabled = true;
+            btImg.Enabled = true;
         }
         private void disableOkCancel()
         {
             btOk.Enabled = false;
             btCancel.Enabled = false;
+            tbNombreJ.Enabled = false;
+            btImg.Enabled = false;
         }
 
         private void disableBtJugador()
@@ -94,6 +96,28 @@ namespace PingPong
             btDel.Enabled = true;
             btMod.Enabled = true;
             btAdd.Enabled = true;
+        }
+
+        private async Task setJugadorFB()
+        {
+            var client = new FirebaseClient("https://pingpong-24930.firebaseio.com/");
+            var child = client.Child("jugadors/");
+
+            await child.PostAsync(jugador);
+        }
+
+        private async Task getJugadoresFB()
+        {
+            var firebase = new FirebaseClient("https://pingpong-24930.firebaseio.com/");
+
+            var jugadores = await firebase
+                .Child("jugadores")
+                .OnceAsync<Jugador>();
+
+            foreach ( var p1 in jugadores)
+            {
+                MessageBox.Show(p1.Key + " -> " + p1.Object.ToString());
+            }
         }
 
     }
