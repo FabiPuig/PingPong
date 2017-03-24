@@ -5,7 +5,7 @@ namespace PingPong
 {
     class Jugador
     {
-        public int Id { get; set; }
+        public String Id { get; set; }
         public String Nombre{ get; set; }
         public String Image { get; set; }
         public int Jugados { get; set; }

@@ -390,12 +390,14 @@
             // 
             // lvJugador
             // 
+            this.lvJugador.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.lvJugador.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvJugador.Location = new System.Drawing.Point(0, 0);
             this.lvJugador.Name = "lvJugador";
             this.lvJugador.Size = new System.Drawing.Size(128, 329);
             this.lvJugador.TabIndex = 0;
             this.lvJugador.UseCompatibleStateImageBehavior = false;
+            this.lvJugador.ItemActivate += new System.EventHandler(this.lvJugador_ItemActivate);
             // 
             // splitContainer4
             // 

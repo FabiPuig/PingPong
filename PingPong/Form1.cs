@@ -17,9 +17,13 @@ namespace PingPong
         private bool addPlayer = false;
         private String imgUrl;
         private Jugador jugador;
+        private List<Jugador> players;
+
         public Form1()
         {
             InitializeComponent();
+            getJugadoresFB();
+            
         }
 
         private void btAdd_Click(object sender, EventArgs e)
@@ -103,22 +107,40 @@ namespace PingPong
             var client = new FirebaseClient("https://pingpong-24930.firebaseio.com/");
             var child = client.Child("jugadors/");
 
-            await child.PostAsync(jugador);
+            var p1 = await child.PostAsync(jugador);
+            jugador.Id = p1.Key;
         }
 
         private async Task getJugadoresFB()
         {
             var firebase = new FirebaseClient("https://pingpong-24930.firebaseio.com/");
 
-            var jugadores = await firebase
-                .Child("jugadores")
-                .OnceAsync<Jugador>();
+            var jugadores = await firebase.Child("jugadors").OnceAsync<Jugador>();
+
+
+            string msg = "";
+
+            players = new List<Jugador>();
 
             foreach ( var p1 in jugadores)
             {
-                MessageBox.Show(p1.Key + " -> " + p1.Object.ToString());
+                Jugador j = p1.Object;
+                players.Add(j);
+                msg += j.Nombre + "\n" ;
+            }
+            lvJugador.View = View.List;
+            for (int i = 0; i < players.Count; i++)
+            {
+                lvJugador.Items.Add( players[i].Nombre );
             }
         }
 
+        private void lvJugador_ItemActivate(object sender, EventArgs e)
+        {
+
+            int i = lvJugador.SelectedIndices[0];
+            Jugador j = players[i];
+            tbNombreJ.Text = j.Nombre;
+        }
     }
 }
