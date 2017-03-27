@@ -506,9 +506,9 @@
             // tbNombreJ
             // 
             this.tbNombreJ.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbNombreJ.Enabled = false;
             this.tbNombreJ.Location = new System.Drawing.Point(3, 23);
             this.tbNombreJ.Name = "tbNombreJ";
+            this.tbNombreJ.ReadOnly = true;
             this.tbNombreJ.Size = new System.Drawing.Size(525, 20);
             this.tbNombreJ.TabIndex = 1;
             // 
@@ -546,21 +546,25 @@
             // 
             // btMod
             // 
+            this.btMod.Enabled = false;
             this.btMod.Location = new System.Drawing.Point(340, 5);
             this.btMod.Name = "btMod";
             this.btMod.Size = new System.Drawing.Size(90, 36);
             this.btMod.TabIndex = 4;
             this.btMod.Text = "MODIFICAR";
             this.btMod.UseVisualStyleBackColor = true;
+            this.btMod.Click += new System.EventHandler(this.btMod_Click);
             // 
             // btDel
             // 
+            this.btDel.Enabled = false;
             this.btDel.Location = new System.Drawing.Point(244, 5);
             this.btDel.Name = "btDel";
             this.btDel.Size = new System.Drawing.Size(90, 36);
             this.btDel.TabIndex = 5;
             this.btDel.Text = "ELIMINAR";
             this.btDel.UseVisualStyleBackColor = true;
+            this.btDel.Click += new System.EventHandler(this.btDel_Click);
             // 
             // openFileDialog1
             // 

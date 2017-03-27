@@ -15,9 +15,11 @@ namespace PingPong
     public partial class Form1 : Form
     {
         private bool addPlayer = false;
+        private bool modPlayer = false;
         private String imgUrl;
         private Jugador jugador;
         private List<Jugador> players;
+        private int index;
 
         public Form1()
         {
@@ -29,15 +31,20 @@ namespace PingPong
         private void btAdd_Click(object sender, EventArgs e)
         {
             enableOkCancel();
-            disableBtJugador();
+            disableModDel();
             addPlayer = true;
-
+            tbNombreJ.ReadOnly = false;
+            btAdd.Enabled = false;
+            clearPlayer();
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
             disableOkCancel();
-            enableBtJugador();
+            btAdd.Enabled = true;
+            disableModDel();
+            tbNombreJ.Enabled = false;
+            modPlayer = false;
             addPlayer = false;
         }
 
@@ -47,6 +54,12 @@ namespace PingPong
             {
                 imgUrl = openFileDialog1.FileName;
                 pictureBox1.Load(openFileDialog1.FileName);
+
+                if ( modPlayer )
+                {
+                    players[index].Image = imgUrl;
+                }
+
             }
         }
 
@@ -69,8 +82,16 @@ namespace PingPong
                     MessageBox.Show("Jugador guardado correctamente");
                     addPlayer = false;
                     disableOkCancel();
-                    enableBtJugador();
+                    clearPlayer();
+                    btAdd.Enabled = true;
                 }
+            }else if ( modPlayer )
+            {
+                players[index].Nombre = tbNombreJ.Text;
+                updateJugadorFB();
+                modPlayer = false;
+                disableOkCancel();
+                btAdd.Enabled = true;
             }
         }
 
@@ -78,28 +99,31 @@ namespace PingPong
         {
             btOk.Enabled = true;
             btCancel.Enabled = true;
-            tbNombreJ.Enabled = true;
             btImg.Enabled = true;
         }
         private void disableOkCancel()
         {
             btOk.Enabled = false;
             btCancel.Enabled = false;
-            tbNombreJ.Enabled = false;
+            tbNombreJ.ReadOnly = true;
             btImg.Enabled = false;
         }
 
-        private void disableBtJugador()
+        private void disableModDel()
         {
             btDel.Enabled = false;
             btMod.Enabled = false;
-            btAdd.Enabled = false;
         }
-        private void enableBtJugador()
+        private void enableModDel()
         {
             btDel.Enabled = true;
             btMod.Enabled = true;
-            btAdd.Enabled = true;
+        }
+
+        private void clearPlayer()
+        {
+            tbNombreJ.Text = "";
+            pictureBox1.Image = null;
         }
 
         private async Task setJugadorFB()
@@ -108,7 +132,6 @@ namespace PingPong
             var child = client.Child("jugadors/");
 
             var p1 = await child.PostAsync(jugador);
-            jugador.Id = p1.Key;
         }
 
         private async Task getJugadoresFB()
@@ -117,17 +140,15 @@ namespace PingPong
 
             var jugadores = await firebase.Child("jugadors").OnceAsync<Jugador>();
 
-
-            string msg = "";
-
             players = new List<Jugador>();
 
             foreach ( var p1 in jugadores)
             {
                 Jugador j = p1.Object;
+                j.Id = p1.Key;
                 players.Add(j);
-                msg += j.Nombre + "\n" ;
             }
+
             lvJugador.View = View.List;
             for (int i = 0; i < players.Count; i++)
             {
@@ -135,12 +156,51 @@ namespace PingPong
             }
         }
 
+        private async Task delJugadorFB()
+        {
+            var client = new FirebaseClient("https://pingpong-24930.firebaseio.com/");
+            var child = client.Child("jugadors/" + players[ index ].Id) ;
+
+            await child.DeleteAsync();
+
+            players.RemoveAt( index );
+
+            MessageBox.Show("Borrado correctamente");
+        }
+
+        private async Task updateJugadorFB()
+        {
+            var client = new FirebaseClient("https://pingpong-24930.firebaseio.com/");
+            var child = client.Child("jugadors/" + players[ index ].Id);
+
+            await child.PutAsync( players[ index ] );
+
+            MessageBox.Show("ok");
+            
+        }
+
         private void lvJugador_ItemActivate(object sender, EventArgs e)
         {
-
-            int i = lvJugador.SelectedIndices[0];
-            Jugador j = players[i];
+            index = lvJugador.SelectedIndices[0];
+            Jugador j = players[ index ];
             tbNombreJ.Text = j.Nombre;
+            pictureBox1.Load( j.Image );
+            btMod.Enabled = true;
+            btDel.Enabled = true;
+        }
+
+        private void btDel_Click(object sender, EventArgs e)
+        {
+            delJugadorFB();
+        }
+
+        private void btMod_Click(object sender, EventArgs e)
+        {
+            modPlayer = true;
+            enableOkCancel();
+            tbNombreJ.Enabled = true;
+            tbNombreJ.ReadOnly = false;
+            btImg.Enabled = true;
         }
     }
 }
