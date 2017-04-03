@@ -78,6 +78,8 @@ namespace PingPong
                 else
                 {
                     jugador = new Jugador(tbNombreJ.Text, imgUrl);
+                    players.Add(jugador);
+                    refreshLv();
                     setJugadorFB();
                     MessageBox.Show("Jugador guardado correctamente");
                     addPlayer = false;
@@ -88,10 +90,12 @@ namespace PingPong
             }else if ( modPlayer )
             {
                 players[index].Nombre = tbNombreJ.Text;
-                updateJugadorFB();
+                refreshLv();
                 modPlayer = false;
                 disableOkCancel();
                 btAdd.Enabled = true;
+                updateJugadorFB();
+
             }
         }
 
@@ -132,6 +136,7 @@ namespace PingPong
             var child = client.Child("jugadors/");
 
             var p1 = await child.PostAsync(jugador);
+
         }
 
         private async Task getJugadoresFB()
@@ -149,11 +154,9 @@ namespace PingPong
                 players.Add(j);
             }
 
-            lvJugador.View = View.List;
-            for (int i = 0; i < players.Count; i++)
-            {
-                lvJugador.Items.Add( players[i].Nombre );
-            }
+            resetLv();
+
+            refreshLv();
         }
 
         private async Task delJugadorFB()
@@ -166,10 +169,12 @@ namespace PingPong
             players.RemoveAt( index );
 
             MessageBox.Show("Borrado correctamente");
+
         }
 
         private async Task updateJugadorFB()
         {
+            
             var client = new FirebaseClient("https://pingpong-24930.firebaseio.com/");
             var child = client.Child("jugadors/" + players[ index ].Id);
 
@@ -192,6 +197,10 @@ namespace PingPong
         private void btDel_Click(object sender, EventArgs e)
         {
             delJugadorFB();
+            tbNombreJ.Text = "";
+            pictureBox1.Image = null;
+            players.RemoveAt(index);
+            refreshLv();
         }
 
         private void btMod_Click(object sender, EventArgs e)
@@ -201,6 +210,25 @@ namespace PingPong
             tbNombreJ.Enabled = true;
             tbNombreJ.ReadOnly = false;
             btImg.Enabled = true;
+        }
+
+        //Refresh del listview( usar cuando se modifique la lista de jugadores)
+        private void refreshLv()
+        {
+            resetLv();
+            for (int i = 0; i < players.Count; i++)
+            {
+                lvJugador.Items.Add(players[i].Nombre);
+            }
+        }
+
+        //Reset del listview para que no añada la nueva informacion a la que habia
+        private void resetLv()
+        {
+            this.lvJugador.Items.Clear();
+            this.lvJugador.Update();
+            this.lvJugador.Refresh();
+            this.lvJugador.View = View.List;
         }
     }
 }
